@@ -1,44 +1,41 @@
 
 <?php
+session_start();
 include "db.php";
 
 if(isset($_POST['login'])){
 
-    $password = $_POST['password'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
 
-   // Search for user by email
-    $result = $conn->query("SELECT * FROM users WHERE email='$email'");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if($row = $result->fetch_assoc()){
+    $user = $result->fetch_assoc();
 
-        // Verify hashed password
-        if(password_verify($password, $row['password'])){
+    if($user && password_verify($password, $user['password'])){
 
-           // Login
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['role'] = $row['role'];
-           // Redirect to the home page
-            header("Location: index.php");
-            exit();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
 
-        } else {
-            echo "❌ Incorrect password";
-        }
+        header("Location: dashboard.php");
+        exit();
 
     } else {
-        echo"❌ This email does not exist";
+        echo "❌ Wrong email or password";
     }
 }
 ?>
 
-<!-- Login Interface -->
 <form method="POST">
-    <h2>Login</h2>
+<h2>Login</h2>
 
-    <input type="email" name="email" placeholder="Email" required><br><br>
+<input type="email" name="email" placeholder="Email" required><br><br>
+<input type="password" name="password" placeholder="Password" required><br><br>
 
-    <input type="password" name="password" placeholder="Password" required><br><br>
-
-    <button type="submit" name="login">Login</button>
+<button type="submit" name="login">Login</button>
 </form>
+
+<a href="register.php">Create account</a>

@@ -8,31 +8,33 @@ if(isset($_POST['register'])){
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Check if the email already exists
-    $check = $conn->query("SELECT * FROM users WHERE email='$email'");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if($check->num_rows > 0){
-        echo "This email is already registered before";
+    if($result->num_rows > 0){
+        echo "❌ Email already exists";
     } else {
 
-        // Insert new user
-        $conn->query("INSERT INTO users (name, email, password, role)
-        VALUES ('$name', '$email', '$password', 'user')");
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')");
+        $stmt->bind_param("sss", $name, $email, $password);
+        $stmt->execute();
 
-        echo "Registration successful, you can now log in";
+        echo "✅ Registered successfully";
     }
 }
 ?>
 
-<!-- Registration Interface -->
 <form method="POST">
-    <h2>Register</h2>
+<h2>Register</h2>
 
-    <input type="text" name="name" placeholder="Name" required><br><br>
+<input type="text" name="name" placeholder="Name" required><br><br>
+<input type="email" name="email" placeholder="Email" required><br><br>
+<input type="password" name="password" placeholder="Password" required><br><br>
 
-    <input type="email" name="email" placeholder="Email" required><br><br>
+<button type="submit" name="register">Register</button>
 
-    <input type="password" name="password" placeholder="Password" required><br><br>
-
-    <button type="submit" name="register">Register</button>
 </form>
+
+<a href="login.php">Already have account? Login</a>
