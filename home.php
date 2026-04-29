@@ -62,7 +62,7 @@ if (!isset($_SESSION['user'])) {
             
             <li><a href="#" class="btn-dark">الوضع الليلي</a></li>
            <a href="http://localhost/media_scope/profail.php">👤 البروفايل</a>
-             <a href="logout.php">تسجيل الخروج</a>
+             <a href="logout.php" >تسجيل الخروج</a>
             </li>
         </ul>
     
