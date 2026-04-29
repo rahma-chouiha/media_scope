@@ -22,7 +22,8 @@ if (!isset($_SESSION['user'])) {
     <nav class="navbar">
         <div class="logo">Media<span>Scope</span></div>
         <ul class="nav-links">
-            <li class="dropdown"><a href="home.php">الرئيسية</a></li>  
+            <li class="dropdown">
+                <a href="home.php">الرئيسية</a></li>  
   <li class="dropdown"> <a href="#">الأخبار</a>
             <ul class="dropdown-content">
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
@@ -56,10 +57,11 @@ if (!isset($_SESSION['user'])) {
     </ul>
 </li>
        
-      <li class="dropdown">
+           <li class="dropdown">
             <li><a href="#footer" >تواصل معنا </a></li>
             
             <li><a href="#" class="btn-dark">الوضع الليلي</a></li>
+           <a href="http://localhost/media_scope/profail.php">👤 البروفايل</a>
              <a href="logout.php">تسجيل الخروج</a>
             </li>
         </ul>

@@ -45,13 +45,14 @@ if(isset($_POST['add'])){
     <h1>⚙️ لوحة التحكم | MediaScope</h1>
 
     <h3>إضافة خبر جديد</h3>
+    <form method="POST" action="add_article.php">
     <input type="text" id="title" placeholder="عنوان الخبر (مثلاً: ورشة عمل جديدة)">
     <textarea id="content" rows="4" placeholder="اكتب تفاصيل الخبر هنا..."></textarea>
     <input type="text" id="image" placeholder="رابط صورة الخبر (URL)">
 
     <button class="btn-add" onclick="addArticle()">نشر الخبر الآن</button>
     <button class="btn-add" style="background: var(--text-muted); margin-top: 10px; cursor: pointer;" onclick="restoreLastPoint()">↩️ تراجع (استعادة نقطة حفظ سابقة)</button>
-
+</form>
     <hr>
 
     <h3>إدارة الأخبار المنشورة</h3>
