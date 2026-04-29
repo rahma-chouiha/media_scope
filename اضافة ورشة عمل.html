@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+    <title>MediaScope | لوحة التحكم خاص بالورشة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="اضافة خبر.css">
+</head>
+<body>
+<div class="container">
+    <h1>⚙️ لوحة التحكم للورشة | MediaScope</h1>
+
+    <h3>إضافة ورشة جديد</h3>
+    <input type="text" id="title" placeholder="عنوان الوشة (مثلاً: ورشة عمل جديدة)">
+    <textarea id="content" rows="4" placeholder="اكتب تفاصيل الوشة هنا..."></textarea>
+    <input type="text" id="emoji" placeholder="أدخل إيموجي هنا (مثلاً: 💻 أو 🎨)">
+
+    <button class="btn-add" onclick="addWorkshop()">نشر الوشة الآن</button>
+    <button class="btn-add" style="background: var(--text-muted); margin-top: 10px; cursor: pointer;" onclick="restoreLastPoint()">↩️ تراجع (استعادة نقطة حفظ سابقة)</button>
+
+    <hr>
+
+    <h3>إدارة ورشات المنشورة</h3>
+    <div id="workshopsList">
+        </div>
+</div>
+<a href="home.php" style="text-decoration: none; color: var(--primary-color); font-weight: bold;">
+    ← العودة للرئيسية
+</a>
+
+<script src="اضافة ورشة.js"></script>
+</body>
+</html>
+

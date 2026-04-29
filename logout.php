@@ -1,8 +1,11 @@
-
 <?php
 session_start();
+
+// حذف كل بيانات الجلسة
+session_unset();
 session_destroy();
 
-header("Location: index.php");
+// توجيه لصفحة تسجيل الدخول
+header("Location: loginRegister.html");
 exit();
 ?>
