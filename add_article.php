@@ -4,7 +4,7 @@ session_start();
 include "db.php";
 
 // Secrety
-if($_SESSION['role'] != 'admin'){
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     die("NO! error");
 }
 
@@ -46,8 +46,8 @@ if(isset($_POST['add'])){
 
     <h3>إضافة خبر جديد</h3>
     <form method="POST" action="add_article.php">
-    <input type="text" id="title" placeholder="عنوان الخبر (مثلاً: ورشة عمل جديدة)">
-    <textarea id="content" rows="4" placeholder="اكتب تفاصيل الخبر هنا..."></textarea>
+  <input type="text" name="title" placeholder="عنوان الخبر">
+<textarea name="content" rows="4"></textarea>
     <input type="text" id="image" placeholder="رابط صورة الخبر (URL)">
 
     <button class="btn-add" onclick="addArticle()">نشر الخبر الآن</button>

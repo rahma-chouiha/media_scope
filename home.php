@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: loginRegister.html");
     exit();
 }
@@ -61,7 +61,6 @@ if (!isset($_SESSION['user'])) {
             <li><a href="#footer" >تواصل معنا </a></li>
             
             <li><a href="#" class="btn-dark">الوضع الليلي</a></li>
-           <a href="http://localhost/media_scope/profail.php">👤 البروفايل</a>
              <a href="logout.php" >تسجيل الخروج</a>
             </li>
         </ul>
