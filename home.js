@@ -60,20 +60,14 @@ function displayWorkshops() {
 
     // مسح المحتوى الثابت (إذا أردت استبداله بالكامل بالديناميكي)
     // grid.innerHTML = ""; 
-
-    workshops.forEach(workshop => {
+workshops.forEach(workshop => {
         const card = document.createElement("div");
-        card.className = "activity-card"; // استخدم نفس كلاس التنسيق الخاص بك
+        card.className = "activity-box"; // نفس كلاس التنسيق للبطاقات الثابتة
 
         card.innerHTML = `
-            <div class="activity-icon-container">
-                <span class="workshop-emoji">${workshop.emoji}</span>
-            </div>
-            <div class="activity-info">
-                <h4>${workshop.title}</h4>
-                <p>${workshop.content}</p>
-                <a href="details.html" class="btn-read">التفاصيل ←</a>
-            </div>
+            <div class="icon">${workshop.emoji || "🛠️"}</div>
+            <h3>${workshop.title || "ورشة جديدة"}</h3>
+            <p>${workshop.content || ""}</p>
         `;
         grid.appendChild(card);
     });
