@@ -35,9 +35,6 @@ function addWorkshop() {
     const emoji = document.getElementById('emoji').value; // جلب الإيموجي
 
     if (title && content && emoji) {
-        // جلب الورشات القديمة أو إنشاء مصفوفة جديدة
-        const workshops = JSON.parse(localStorage.getItem('workshops')) || [];
-        
         // إضافة الورشة الجديدة
         const newWorkshop = {
             id: Date.now(),
@@ -46,15 +43,36 @@ function addWorkshop() {
             emoji: emoji
         };
 
-        workshops.push(newWorkshop);
-        localStorage.setItem('workshops', JSON.stringify(workshops));
+        createRestorePoint(workshopsList);
+        workshopsList.push(newWorkshop);
+        saveToMemory();
+        displayWorkshops();
 
         alert("تم نشر الورشة بنجاح!");
-        window.location.reload(); // تحديث القائمة في صفحة التحكم
+
+        document.getElementById('title').value = "";
+        document.getElementById('content').value = "";
+        document.getElementById('emoji').value = "";
     } else {
         alert("يرجى ملء جميع الحقول ووضع إيموجي!");
     }
 
+}
+
+function displayWorkshops() {
+    const container = document.getElementById("workshopsList");
+    if (!container) return;
+    container.innerHTML = "";
+
+    workshopsList.forEach(workshop => {
+        const div = document.createElement("div");
+        div.className = "article";
+        div.innerHTML = `
+            <h4>${workshop.emoji || "🛠️"} ${workshop.title}</h4>
+            <button class="btn-delete" onclick="deleteWorkshop(${workshop.id})">حذف</button>
+        `;
+        container.appendChild(div);
+    });
 }
 
 
@@ -69,3 +87,4 @@ function deleteWorkshop(id) {
 window.addWorkshop = addWorkshop;
 window.deleteWorkshop = deleteWorkshop;
 window.restoreLastPoint = restoreLastPoint;
+
